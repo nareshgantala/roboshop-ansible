@@ -1,0 +1,5 @@
+- name: Demo robosop project setup
+  hosts: all
+  roles:
+    - "{{ role_name }}"
+  
