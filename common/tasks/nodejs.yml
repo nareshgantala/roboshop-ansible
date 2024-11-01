@@ -15,10 +15,10 @@
     # func_systemd_setup
 
 - name: disable nodejs
-  ansible.builtin.shell: dnf module disable nodejs -y &>>$log_file
+  ansible.builtin.shell: dnf module disable nodejs -y
 
 - name: enable 18 version nodejs
-  ansible.builtin.shell: dnf module enable nodejs:18 -y &>>$log_file
+  ansible.builtin.shell: dnf module enable nodejs:18 -y
 
 - name: Install nodejs
   ansible.builtin.dnf:
