@@ -1,6 +1,6 @@
 - name: Demo robosop project setup
   hosts: all
-  become: yes
+  become: true
   roles:
     - "{{ role_name }}"
   
