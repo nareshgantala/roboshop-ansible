@@ -1,0 +1,39 @@
+    # func_print_head "Disable current nodejs module"
+    # dnf module disable nodejs -y &>>$log_file
+    # func_stat_check $?
+
+
+    # func_print_head "Enable 18 Version nodejs module"
+    # dnf module enable nodejs:18 -y &>>$log_file
+    # func_stat_check $?
+
+
+    # func_print_head "Install nodejs" 
+    # dnf install nodejs -y &>>$log_file
+    # func_stat_check $?
+
+    
+    # func_app_prereq
+    
+    
+    # func_print_head "Install nodejs Dependencies" 
+    # npm install &>>$log_file
+    # func_stat_check $?
+    
+    # func_print_head debug code
+    # echo "schema_setup is set to: $schema_setup"
+
+
+    # func_schema_setup
+    # func_systemd_setup
+
+- name: disable nodejs
+  ansible.builtin.shell: dnf module disable nodejs -y &>>$log_file
+
+- name: enable 18 version nodejs
+  ansible.builtin.shell: dnf module enable nodejs:18 -y &>>$log_file
+
+- name: Install nodejs
+  ansible.builtin.dnf:
+    name: nodejs
+    state: installled
