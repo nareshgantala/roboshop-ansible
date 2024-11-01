@@ -1,16 +1,3 @@
-    # func_print_head "Disable current nodejs module"
-    # dnf module disable nodejs -y &>>$log_file
-    # func_stat_check $?
-
-
-    # func_print_head "Enable 18 Version nodejs module"
-    # dnf module enable nodejs:18 -y &>>$log_file
-    # func_stat_check $?
-
-
-    # func_print_head "Install nodejs" 
-    # dnf install nodejs -y &>>$log_file
-    # func_stat_check $?
 
     
     # func_app_prereq
@@ -37,3 +24,12 @@
   ansible.builtin.dnf:
     name: nodejs
     state: installled
+
+- name: Include task list in play
+  ansible.builtin.import_tasks:
+    file: app_prereq.yml
+
+- name: Install nodejs Dependencies
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app

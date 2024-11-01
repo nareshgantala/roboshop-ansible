@@ -1,34 +1,19 @@
-    # id ${app_user} &>>$log_file
-
-    # if [ $? -ne 0 ]; then
-    #     func_print_head add roboshop user  
-    #     useradd ${app_user} &>>$log_file
-    #     func_stat_check $?
-    # else
-    #     func_print_head add roboshop user  
-    #     echo skipping user creation, as roboshop user already exists
-    # fi
-
-    # func_print_head create application directory
-    # rm -rf /app &>>$log_file
-    # mkdir /app &>>$log_file
-    # func_stat_check $?
-    
-    # func_print_head download application zip file  
-    # curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>$log_file
-    # func_stat_check $?
-
-    # cd /app 
-    
-    # func_print_head Unzip application files  
-    # unzip /tmp/${component}.zip &>>$log_file
-    # func_stat_check $?
-
 - name: Add roboshop user 
   ansible.builtin.user:
     name: "{{ app_user }}"
 
-- name: createapplication directory
+- name: Remove the defult content
   ansible.builtin.file:
-  path: 
+    path: /app
+    state: absent
 
+- name: Create defult content
+  ansible.builtin.file:
+    path: /app
+    state: directory
+
+- name: Download front end zip file 
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
+    dest: /app
+    remote_src: yes

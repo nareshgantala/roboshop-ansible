@@ -13,7 +13,7 @@
     path: /usr/share/nginx/html
     state: absent
 
-- name: Remove the defult content
+- name: Create defult content
   ansible.builtin.file:
     path: /usr/share/nginx/html
     state: directory
